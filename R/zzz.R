@@ -1,8 +1,6 @@
 #' @importFrom magrittr `%>%`
 #' @importFrom memoise memoise
 #' @importFrom cachem cache_mem
-#' @importFrom extrafont font_import loadfonts
-#' @import Rttf2pt1
 NULL
 
 .onLoad <- function(libname, pkgname) {
@@ -22,9 +20,13 @@ NULL
 
   # --- Load up Calibri for plots ----------------------------------
   # This checks to see if Calibri is registered as a font, and if not, installs it
-  if (! "Calibri" %in% names(windowsFonts())) {
-    suppressMessages(extrafont::font_import(pattern = "calibri", prompt = FALSE))
-    extrafont::loadfonts(device = "win", quiet = TRUE)
+  # Only run if extrafont and Rttf2pt1 are installed
+  if (requireNamespace("extrafont", quietly = TRUE) & requireNamespace("Rttf2pt1", quietly = TRUE)) {
+    if (! "Calibri" %in% names(grDevices::windowsFonts())) {
+      packageStartupMessage("Calibri not registered in R fonts, installing...")
+      suppressMessages(extrafont::font_import(pattern = "calibri", prompt = FALSE))
+      extrafont::loadfonts(device = "win", quiet = TRUE)
+    }
   }
 
   invisible()
