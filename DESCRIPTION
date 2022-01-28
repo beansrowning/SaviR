@@ -25,6 +25,7 @@ Imports:
     RcppRoll,
     cachem,
     data.table,
+    openxlsx,
     magrittr,
     memoise,
     rgdal,
@@ -36,11 +37,14 @@ LazyData: true
 RoxygenNote: 7.1.2
 Suggests: 
     rmarkdown,
+    htmltools,
     tidyr,
     webshot,
     knitr,
     vdiffr,
-    testthat (>= 3.0.0)
+    httr,
+    testthat (>= 3.0.0),
+    covr
 Config/testthat/edition: 3
 Depends: 
     R (>= 3.5.0)
